@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Scrape Sacramento City trees
       run: |-
         curl https://opendata.arcgis.com/api/v3/datasets/b9b716e09b5048179ab648bb4518452b_0/downloads/data?format=csv&spatialRefId=4326 > sac-trees.csv
     - name: Commit and push if it changed
       run: |-
-        git config user.name "Automated"
-        git config user.email "actions@users.noreply.github.com"
+        git config user.name github-actions
+        git config user.email github-actions@github.com
         git add *.csv
         timestamp=$(date -u)
         git commit -m "Latest data: ${timestamp}" || exit 0
